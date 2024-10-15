@@ -9,23 +9,26 @@ public class GravityFlip : MonoBehaviour
     // Gravity is set to -16 to make the player "fall" faster
     private float gravity = -16;
 
-    [SerializeField] private Rigidbody2D rb;
+	[SerializeField] private Transform groundCheck;
+	[SerializeField] private LayerMask groundLayer;
+	[SerializeField] private Animator animator;
+	[SerializeField] private Rigidbody2D rb;
 
     private void Update()
     {
 
-        Debug.Log("Gravity: " + gravity);
+		animator.SetBool("isFlipping", !IsGrounded());
 
-        if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Fire1") && IsGrounded())
         {
             FlipVertical();
         }
+
     }
 
     // Flips the player vertically and changes gravity direction
     private void FlipVertical()
     {
-        Debug.Log("Flipping gravity");
         gravity *= -1;
         rb.velocity = new Vector2(rb.velocity.x, gravity);
         Vector3 localScale = transform.localScale;
@@ -33,5 +36,11 @@ public class GravityFlip : MonoBehaviour
         transform.localScale = localScale;
 
     }
+
+	// Checks if the player is grounded
+	private bool IsGrounded()
+	{
+		return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+	}
 
 }

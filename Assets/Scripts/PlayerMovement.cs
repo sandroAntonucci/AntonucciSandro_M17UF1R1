@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
 
     // Start to apply initial gravity to the player
     private void Start()
@@ -36,14 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isSpawned) return;
         horizontal = Input.GetAxisRaw("Horizontal");
-        animator.SetBool("isFlipping", !IsGrounded());
         FlipHorizontal();
-    }
-
-    // Checks if the player is grounded
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     // Updates the player's velocity

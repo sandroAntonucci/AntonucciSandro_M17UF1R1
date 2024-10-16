@@ -10,7 +10,7 @@ public class DamagePlayer : MonoBehaviour
         GameObject gameObject = collision.gameObject;
         if (gameObject.CompareTag("Player")) 
         {
-            gameObject.GetComponent<PlayerBase>().Die();
+            gameObject.GetComponent<Player>().Die();
         }
     }
 }

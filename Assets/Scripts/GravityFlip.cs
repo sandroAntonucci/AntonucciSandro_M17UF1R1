@@ -7,7 +7,7 @@ public class GravityFlip : MonoBehaviour
 {
 
     // Gravity is set to -16 to make the player "fall" faster
-    private float gravity = -16;
+    
 
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private LayerMask groundLayer;
@@ -29,8 +29,10 @@ public class GravityFlip : MonoBehaviour
     // Flips the player vertically and changes gravity direction
     private void FlipVertical()
     {
-        gravity *= -1;
-        rb.velocity = new Vector2(rb.velocity.x, gravity);
+
+        if(gameObject.GetComponentInParent<Player>().isSpawned == false) return;
+
+        gameObject.GetComponentInParent<Player>().gravity *= -1;
         Vector3 localScale = transform.localScale;
         localScale.y *= -1;
         transform.localScale = localScale;

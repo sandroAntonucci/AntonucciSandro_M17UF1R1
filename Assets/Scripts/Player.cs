@@ -4,27 +4,27 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     private float horizontal;
     private float speed = 8f;
     private bool isFacingRight = true;
-    private bool isSpawned = false;
-    private float initialGravity = -16f;
+    public bool isSpawned = false;
+    public float gravity = -16;
 
+    [SerializeField] private Transform respawnPoint;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
 
     // Start to apply initial gravity to the player
     private void Start()
     {
-        StartCoroutine(WaitForSpawn());
-        rb.velocity = new Vector2(0f, initialGravity);
+        RespawnPlayer();
     }
 
     // Makes the player wait for spawn before moving
-    private IEnumerator WaitForSpawn()
+    public IEnumerator WaitForSpawn()
     {
         yield return new WaitForSeconds(0.3f);
         isSpawned = true;
@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isSpawned) return;
         horizontal = Input.GetAxisRaw("Horizontal");
         FlipHorizontal();
     }
@@ -40,7 +39,8 @@ public class PlayerMovement : MonoBehaviour
     // Updates the player's velocity
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (!isSpawned) return;
+        rb.velocity = new Vector2(horizontal * speed, gravity);
         animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));                                                                                                                                            
     }
 
@@ -54,5 +54,22 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1;
             transform.localScale = localScale;
         }
+    }
+
+    // Plays the dying animation which queues the respawn
+    public void Die()
+    {
+        animator.Play("Die");
+    }
+
+    public void RespawnPlayer()
+    {
+        
+        isSpawned = false;
+        rb.velocity = new Vector2(0f, gravity);
+        transform.position = respawnPoint.transform.position;
+        StartCoroutine(WaitForSpawn());
+        
+
     }
 }

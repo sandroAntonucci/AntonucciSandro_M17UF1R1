@@ -9,17 +9,19 @@ public class Player : MonoBehaviour
 
     private float horizontal;
     private float speed = 8f;
+    private Vector2 respawnPoint;
     private bool isFacingRight = true;
     public bool isSpawned = false;
     public float gravity = -16;
 
-    [SerializeField] private Transform respawnPoint;
+    [SerializeField] public bool canFlipGravity = false;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
 
     // Start to apply initial gravity to the player
     private void Start()
     {
+        respawnPoint = transform.position;
         RespawnPlayer();
     }
 
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         isSpawned = true;
     }
 
+    // Gets the player's input
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -62,12 +65,25 @@ public class Player : MonoBehaviour
         animator.Play("Die");
     }
 
+    // Respawns the player
     public void RespawnPlayer()
     {
-        
+
         isSpawned = false;
+
+        // Flips the player and changes gravity if it dies going up
+        if (gravity == 16)
+        {
+            gravity = -16;
+            Vector3 localScale = transform.localScale;
+            localScale.y *= -1;
+            transform.localScale = localScale;
+        }
+
+        // Resets player position and velocity
         rb.velocity = new Vector2(0f, gravity);
-        transform.position = respawnPoint.transform.position;
+        transform.position = respawnPoint;
+
         StartCoroutine(WaitForSpawn());
         
 

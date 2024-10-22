@@ -6,20 +6,25 @@ using UnityEngine;
 public class GravityFlip : MonoBehaviour
 {
 
-    // Gravity is set to -16 to make the player "fall" faster
-    
+    private Player player;
 
-	[SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform groundCheck;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private Animator animator;
 	[SerializeField] private Rigidbody2D rb;
+
+    // Gets the player object on start
+    private void Start()
+    {
+        player = gameObject.GetComponentInParent<Player>();
+    }
 
     private void Update()
     {
 
 		animator.SetBool("isFlipping", !IsGrounded());
 
-		if (Input.GetButtonDown("Fire1") && IsGrounded())
+		if (Input.GetButtonDown("Fire1") && IsGrounded() && player.canFlipGravity)
         {
             FlipVertical();
         }
@@ -30,12 +35,15 @@ public class GravityFlip : MonoBehaviour
     private void FlipVertical()
     {
 
-        if(gameObject.GetComponentInParent<Player>().isSpawned == false) return;
+        if(player.isSpawned == false) return;
 
-        gameObject.GetComponentInParent<Player>().gravity *= -1;
+        player.gravity *= -1;
+
+        
         Vector3 localScale = transform.localScale;
         localScale.y *= -1;
         transform.localScale = localScale;
+        
 
     }
 

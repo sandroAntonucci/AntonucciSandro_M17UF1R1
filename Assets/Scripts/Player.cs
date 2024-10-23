@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] public bool canFlipGravity = false;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private ParticleSystem deathParticles;
 
     // Start to apply initial gravity to the player
     private void Start()
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
     // Plays the dying animation which queues the respawn
     public void Die()
     {
+        deathParticles.Play();
+        GetComponent<SimpleFlash>().Flash();
         animator.Play("Die");
     }
 

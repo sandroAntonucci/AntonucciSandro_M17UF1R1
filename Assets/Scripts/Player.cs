@@ -9,10 +9,11 @@ public class Player : MonoBehaviour
 
     private float horizontal;
     private float speed = 8f;
-    private Vector2 respawnPoint;
     private bool isFacingRight = true;
+
     public bool isSpawned = false;
     public float gravity = -16;
+    public Vector2 respawnPoint;
 
     [SerializeField] public bool canFlipGravity = false;
     [SerializeField] private Animator animator;

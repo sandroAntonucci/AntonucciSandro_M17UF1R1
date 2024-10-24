@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DamagePlayer : MonoBehaviour
 {
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject gameObject = collision.gameObject;

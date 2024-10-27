@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5099782527637335911}
   - component: {fileID: 1402520363266222371}
   - component: {fileID: 7069801886634031937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aec18da6c767154d888e1eb821ca670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
   speed: -10
   rb: {fileID: 7069801886634031937}
 --- !u!61 &5099782527637335911
@@ -65,7 +66,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -144,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3523783034183323511}
   - component: {fileID: 6245398665198719090}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

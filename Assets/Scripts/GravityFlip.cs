@@ -47,10 +47,23 @@ public class GravityFlip : MonoBehaviour
 
     }
 
-	// Checks if the player is grounded
-	private bool IsGrounded()
-	{
-		return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
-	}
+    // Checks if the player is grounded
+    private bool IsGrounded()
+    {
+        // Cast a ray downwards from the player's feet to check for ground
+
+        RaycastHit2D hit;
+
+        if(player.gravity < 0)
+        {
+            hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(groundCheck.position, Vector2.up, 0.1f, groundLayer);
+        }
+
+        return hit.collider != null;
+    }
 
 }

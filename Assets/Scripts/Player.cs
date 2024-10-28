@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem deathParticles;
 
-    // Start to apply initial gravity to the player
+    // Start to apply initial properties to the player (gravity, position, velocity)
     private void Start()
     {
         respawnPoint = transform.position;

@@ -119,3 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997bb7040467dd145bbd81626e2be5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 1288264570342730354, guid: 8bc4556d8bc41ee46b8c15421c3c5371, type: 3}
+  animator: {fileID: 1403757947269342708}
+  shootRate: 2

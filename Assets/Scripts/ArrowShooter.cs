@@ -7,6 +7,7 @@ public class ArrowShooter : MonoBehaviour
     
     public Stack<GameObject> arrowStack = new Stack<GameObject>();
 
+
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Animator animator;
     [SerializeField] private float shootRate = 1.0f;
@@ -47,15 +48,14 @@ public class ArrowShooter : MonoBehaviour
             arrow.SetActive(true);
 
             Arrow arrowComponent = arrow.GetComponent<Arrow>();
-
-            arrowComponent.rb.velocity = new Vector2(arrowComponent.speed, 0);
+            
+            Vector2 direction = transform.up;
+            arrowComponent.rb.velocity = direction * arrowComponent.speed;
 
         }
         else
         {
-            GameObject arrow = Instantiate(arrowPrefab);
-
-            arrow.transform.position = gameObject.transform.position;
+            GameObject arrow = Instantiate(arrowPrefab, transform.position, transform.rotation);
 
             Arrow arrowComponent = arrow.GetComponent<Arrow>();
 

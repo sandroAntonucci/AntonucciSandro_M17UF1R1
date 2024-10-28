@@ -16,13 +16,16 @@ public class Arrow : MonoBehaviour
     [SerializeField] private ParticleSystem deathParticles;
     [SerializeField] private Collider2D arrowCollider;
     [SerializeField] private SpriteRenderer arrowSprite;
+   
 
 
     // Sets the start position and velocity of the arrow
     private void Start()
     {
         startPosition = transform.position;
-        rb.velocity = new Vector2(speed, 0);
+
+        Vector2 direction = transform.up; // Use transform.right for 2D (assuming the arrow points right by default)
+        rb.velocity = direction * speed;
     }
 
     // Starts arrow disabling process

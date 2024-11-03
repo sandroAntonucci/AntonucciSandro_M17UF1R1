@@ -20,7 +20,6 @@ public class SimpleFlash : MonoBehaviour
         originalMaterial = spriteRenderer.material;
     }
 
-
     public void Flash()
     {
 
@@ -32,6 +31,7 @@ public class SimpleFlash : MonoBehaviour
         flashRoutine = StartCoroutine(FlashRoutine());
     }
 
+    // Changes color of the sprite (used in player death)
     private IEnumerator FlashRoutine()
     {
 

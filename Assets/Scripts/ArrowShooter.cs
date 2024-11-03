@@ -7,7 +7,6 @@ public class ArrowShooter : MonoBehaviour
     
     public Stack<GameObject> arrowStack = new Stack<GameObject>();
 
-
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Animator animator;
     [SerializeField] private float shootRate = 1.0f;
@@ -29,12 +28,17 @@ public class ArrowShooter : MonoBehaviour
     // Starts shooting when it's inside of camera bounds
     private void OnBecameVisible()
     {
+        // Ignores the scene camera in the editor
+        if (Camera.current.name == "SceneCamera")
+            return;
+
         StartCoroutine(StartShooting());
     }
 
     // Stops shooting when it's outside of camera bounds
     private void OnBecameInvisible()
     {
+        StopCoroutine(StartShooting());
         animator.SetBool("IsActive", false);
     }
 
@@ -48,6 +52,9 @@ public class ArrowShooter : MonoBehaviour
             arrow.SetActive(true);
 
             Arrow arrowComponent = arrow.GetComponent<Arrow>();
+            
+            // Used to only call coroutine once if its already disabled (out of camera bounds)
+            arrowComponent.isDisabling = false;
             
             Vector2 direction = transform.up;
             arrowComponent.rb.velocity = direction * arrowComponent.speed;

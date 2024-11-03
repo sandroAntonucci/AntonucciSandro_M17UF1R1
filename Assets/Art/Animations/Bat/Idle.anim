@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shoot
+  m_Name: Idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,15 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -806080548, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - time: 0.4
-      value: {fileID: 830352585, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - time: 0.5
-      value: {fileID: 1890158794, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - time: 0.6
-      value: {fileID: -1593153405, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - time: 0.9
-      value: {fileID: 2104012176, guid: a5725db1a035db144af192c04ad5746c, type: 3}
+      value: {fileID: 597560132, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - time: 0.1
+      value: {fileID: 629979749, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - time: 0.2
+      value: {fileID: -534049259, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - time: 0.3
+      value: {fileID: 1325968516, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,17 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -806080548, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - {fileID: 830352585, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - {fileID: 1890158794, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - {fileID: -1593153405, guid: a5725db1a035db144af192c04ad5746c, type: 3}
-    - {fileID: 2104012176, guid: a5725db1a035db144af192c04ad5746c, type: 3}
+    - {fileID: 597560132, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - {fileID: 629979749, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - {fileID: -534049259, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
+    - {fileID: 1325968516, guid: 7f5a1ee286ae9c042bba7297b26e52bc, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -81,11 +78,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 1
-    functionName: ShootArrow
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

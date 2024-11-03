@@ -13,6 +13,9 @@ public class FinishPoint : MonoBehaviour
     [SerializeField] private Vector3 nextSpawnPoint;
     [SerializeField] private Vector3 prevSpawnPoint;
 
+    // This is used to change the collision position in different directions for levels right to left instead of left to right
+    [SerializeField] private int collisionPositionOnChange;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !hasTriggered)
@@ -22,7 +25,7 @@ public class FinishPoint : MonoBehaviour
             
             // Changes camera position and collision position (for bugs in scene change detection)
             Camera.main.transform.position = nextPosition;
-            transform.position = new Vector2(transform.position.x - 1, transform.position.y);
+            transform.position = new Vector2(transform.position.x - collisionPositionOnChange, transform.position.y);
 
             // Updates the player ability to change gravity (only used in the first scene change)
             collision.GetComponent<Player>().canFlipGravity = true;
@@ -37,7 +40,7 @@ public class FinishPoint : MonoBehaviour
         {
             hasTriggered = false;
             Camera.main.transform.position = prevPosition;
-            transform.position = new Vector2(transform.position.x + 1, transform.position.y);
+            transform.position = new Vector2(transform.position.x + collisionPositionOnChange, transform.position.y);
             collision.GetComponent<Player>().respawnPoint = prevSpawnPoint;
         }
 

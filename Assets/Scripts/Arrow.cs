@@ -9,7 +9,9 @@ public class Arrow : MonoBehaviour
 {
 
     private Vector2 startPosition;
+    public bool isDisabling = false;
     public ArrowShooter shooter;
+
 
     [SerializeField] public float speed = 10f;
     [SerializeField] public Rigidbody2D rb;
@@ -24,13 +26,14 @@ public class Arrow : MonoBehaviour
     {
         startPosition = transform.position;
 
-        Vector2 direction = transform.up; // Use transform.right for 2D (assuming the arrow points right by default)
+        Vector2 direction = transform.up;
         rb.velocity = direction * speed;
     }
 
     // Starts arrow disabling process
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        isDisabling = true;
         // Coroutine to deactivate the object after particle effect finishes
         StartCoroutine(DisableArrow());
     }
@@ -43,6 +46,7 @@ public class Arrow : MonoBehaviour
         deathParticles.Play();
         arrowCollider.enabled = false;
         arrowSprite.enabled = false;
+        
 
         yield return new WaitForSeconds(deathParticles.main.duration);
 
@@ -55,7 +59,18 @@ public class Arrow : MonoBehaviour
 
     }
 
-    /* Note: The arrow doesn't disappear when it leaves the camera 
-     * bounds because I prefer consistency across scenes. 
-     * It will still reset when it collides with a wall. */
+    // Stops shooting when it's outside of camera bounds
+    private void OnBecameInvisible()
+    {
+        
+        if (!isDisabling)
+        {
+            StartCoroutine(DisableArrow());
+        }
+        
+    }
+
+
+
+
 }

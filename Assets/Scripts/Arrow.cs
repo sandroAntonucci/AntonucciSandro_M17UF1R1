@@ -1,27 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.ParticleSystem;
 
 public class Arrow : MonoBehaviour
 {
-
     private Vector2 startPosition;
-    public bool isDisabling = false;
+    public bool isDisabling = false; // Track if arrow is being disabled
     public ArrowShooter shooter;
-
 
     [SerializeField] public float speed = 10f;
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] private ParticleSystem deathParticles;
     [SerializeField] private Collider2D arrowCollider;
     [SerializeField] private SpriteRenderer arrowSprite;
-   
 
-
-    // Sets the start position and velocity of the arrow
     private void Start()
     {
         startPosition = transform.position;
@@ -30,47 +21,47 @@ public class Arrow : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
-    // Starts arrow disabling process
+    // Dissables arrow when it collides with another object
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isDisabling = true;
-        // Coroutine to deactivate the object after particle effect finishes
-        StartCoroutine(DisableArrow());
+        if (!isDisabling)
+        {
+            isDisabling = true;
+            StartCoroutine(DisableArrow());
+        }
     }
-
-    // Sets the arrow to inactive and puts itself to the shooting pool (to re-use objects instead of destroying and instantiating)
+    
+    // Disables arrow waiting for the particles effect to end
     private IEnumerator DisableArrow()
     {
+        isDisabling = true;
 
-        // Plays particles without affecting the player (no collision and no arrow vision)
+        // Play particle effects and disable visibility and collisions
         deathParticles.Play();
         arrowCollider.enabled = false;
         arrowSprite.enabled = false;
-        
 
         yield return new WaitForSeconds(deathParticles.main.duration);
 
-        // Resets arrow position and state
+        // Reset and deactivate the arrow
         gameObject.SetActive(false);
         arrowCollider.enabled = true;
         arrowSprite.enabled = true;
         transform.position = startPosition;
-        shooter.arrowStack.Push(gameObject);
 
+        shooter.arrowStack.Push(gameObject); // Return arrow to pool
+
+        isDisabling = false; // Reset disabling status
     }
 
-    // Stops shooting when it's outside of camera bounds
+    // Disables arrow when out of camera bounds
     private void OnBecameInvisible()
     {
-        
-        if (!isDisabling)
+        // Only disable if not already disabling and if GameObject is active (without the check it gives an error when exiting the game)
+        if (!isDisabling && gameObject.activeInHierarchy)
         {
             StartCoroutine(DisableArrow());
         }
-        
     }
-
-
-
-
 }
+

@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private AudioSource deathSound;
 
     // Start to apply initial properties to the player (gravity, position, velocity)
     private void Start()
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
     public void Die()
     {
         deathParticles.Play();
+        deathSound.Play();
         GetComponent<SimpleFlash>().Flash();
         animator.Play("Die");
     }

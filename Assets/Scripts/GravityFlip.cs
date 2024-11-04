@@ -12,6 +12,7 @@ public class GravityFlip : MonoBehaviour
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private Animator animator;
 	[SerializeField] private Rigidbody2D rb;
+    [SerializeField] private AudioSource gravityChangeSound;
 
     // Gets the player object on start
     private void Start()
@@ -26,6 +27,7 @@ public class GravityFlip : MonoBehaviour
 
 		if (Input.GetButtonDown("Fire1") && IsGrounded() && player.canFlipGravity && !PauseMenu.isPaused)
         {
+            gravityChangeSound.Play();
             FlipVertical();
         }
 

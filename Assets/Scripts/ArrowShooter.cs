@@ -8,6 +8,7 @@ public class ArrowShooter : MonoBehaviour
 
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource shootSound;
     [SerializeField] private float shootRate = 1.0f;
     [SerializeField] private float startDelay = 0f;
 
@@ -76,5 +77,7 @@ public class ArrowShooter : MonoBehaviour
             Arrow arrowComponent = arrow.GetComponent<Arrow>();
             arrowComponent.shooter = this;
         }
+
+        shootSound.Play();
     }
 }

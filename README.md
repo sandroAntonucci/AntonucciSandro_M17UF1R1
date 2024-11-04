@@ -1,6 +1,6 @@
 # WWWWW
 
-Joc de plataformes 2D d'estil Pixel Art que basa les seves mecàniques en el joc VVVVV. 
+Joc de plataformes 2D scroll lateral d'estil Pixel Art que basa les seves mecàniques en el joc VVVVV. 
 
 Controls del Joc
 

@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     // Gets the player's input
     private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if(!PauseMenu.isPaused) horizontal = Input.GetAxisRaw("Horizontal");
         FlipHorizontal();
     }
 

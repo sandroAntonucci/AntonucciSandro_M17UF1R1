@@ -24,7 +24,7 @@ public class GravityFlip : MonoBehaviour
 
 		animator.SetBool("isFlipping", !IsGrounded());
 
-		if (Input.GetButtonDown("Fire1") && IsGrounded() && player.canFlipGravity)
+		if (Input.GetButtonDown("Fire1") && IsGrounded() && player.canFlipGravity && !PauseMenu.isPaused)
         {
             FlipVertical();
         }
